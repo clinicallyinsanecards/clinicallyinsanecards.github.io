@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <link rel="stylesheet", href="styles.css">
+    <link rel="icon" href="favicon.ico">
+    <script>
+    var clicked = false;
+
+    // credit: https://stackoverflow.com/questions/6121203/how-to-do-fade-in-and-fade-out-with-javascript-and-css
+    function fade(element) {
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                element.style.display = 'none';
+            }
+            element.style.opacity = op;
+            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+            op -= op * 0.1;
+        }, 10);
+    }
+
+    function unfade(element) {
+        var op = 0.1;  // initial opacity
+        element.src = "them.png";
+        element.style.display = 'block';
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            }
+            element.style.opacity = op;
+            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+            op += op * 0.1;
+        }, 10);
+    }
+    
+    function f() {
+        if (!clicked) {
+            clicked = true;
+            var img = document.getElementById("image");
+            
+            fade(img)
+            window.setTimeout(unfade, 1500, img)
+
+            var audio = new Audio("avemaria.wav");
+            audio.play();
+        } else {
+            window.alert("But the Lord laughs at the wicked, for he knows their day is coming. Psalms 37:13")
+        }
+    }
+    </script>
+    <title>Clinically Insane Cards!</title>
+  </head>
+  <body>
+    <div>
+        <img id="image" onclick="f()" src="him.png", alt="But the Lord laughs at the wicked, for he knows their day is coming. Psalms 37:13">
+    </div>
+  </body>
+</html>
